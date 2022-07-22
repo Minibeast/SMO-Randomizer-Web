@@ -1,0 +1,92 @@
+label.strikethrough {
+    line-height: 0.3;
+    font-size: 15px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.striked {
+    text-decoration: line-through;
+}
+
+@media only screen and (min-width: 1000px) {
+    body {
+        width:50vw;
+        margin:auto;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    body {
+        width:85vw;
+        margin:auto;
+        font-size: 24px;
+    }
+}
+
+.card{
+    margin-top:20px;
+}
+
+.card-header{
+    font-size: 20px;
+}
+
+li:hover {
+    background-color: #d3d3d3;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    margin-bottom: 0px;
+    padding-bottom: 6px;
+
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: dark;
+    }
+
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    .card {
+        background-color: black;
+        color: white;
+    }
+
+    .card-header {
+        background-color: rgb(39, 38, 38);
+    }
+
+    a {
+        color: #809fff;
+    }
+
+    p, h1, h2, h3, label {
+        color: white;
+    }
+
+    li:hover {
+        background-color: #888888;
+    }
+    
+    .list-group-item {
+        background-color: black;
+    }
+
+    .footer {
+        background-color: black;
+    }
+}

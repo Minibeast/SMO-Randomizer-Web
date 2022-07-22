@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seed: {{ seed }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/randomizer.css')}}">
+</head>
+<body>
+    {% for x in moons %}
+    <div class="card">
+        <div class="card-header">{{x['kingdom']}}</div>
+        <ul class="list-group list-group-flush">
+            {% for y in x['moons'] %}
+            <li class="list-group-item" onclick="clicked({{get_number(y['name'])}})">
+                <div class="checkbox">
+                    <label class="strikethrough" id="{{get_number(y['name'])}}">{{y['name']}} <b>{{y['trait']}}</b></label>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+    <script>
+        function clicked(id) {
+            class_list = document.getElementById(id).classList;
+            if (class_list.contains("striked")) {
+                class_list.remove("striked");
+            } else {
+                class_list.add("striked");
+            }            
+        }
+    </script>
+</body>
+</html>

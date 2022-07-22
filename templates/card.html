@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seed: {{ seed }} | Card</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/randomizer.css')}}">
+</head>
+<body onkeypress="handleKeyPress(event);">
+    <div class="card">
+        <div class="card-header" id="kingdom_header">Cascade</div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" onclick="generate_new_moon('moon1')">
+                <div class="checkbox">
+                    <label class="strikethrough" id="moon1">Moon 1</label>
+                </div>
+            </li>
+            <li class="list-group-item" onclick="generate_new_moon('moon2')">
+                <div class="checkbox">
+                    <label class="strikethrough" id="moon2">Moon 2</label>
+                </div>
+            </li>
+            <li class="list-group-item" onclick="generate_new_moon('moon3')">
+                <div class="checkbox">
+                    <label class="strikethrough" id="moon3">Moon 3</label>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <br>
+    <button id="advance_kingdom" onclick="next_kingdom()">Advance Kingdom</button>
+    <button id="advance_set" onclick="advance_set()" style="display: none;">Advance Story</button>
+    <button id="undo_btn" onclick="undo_last()" style="display: none;">Undo</button>
+    <script>
+        const moonData = {{ moonData|tojson }};
+    </script>
+    <script src="{{url_for('static', filename='js/card.js')}}"></script>
+</body>
+</html>
