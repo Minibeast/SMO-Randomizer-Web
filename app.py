@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, url_for
 from settings import parse_form, decode_settings, Settings
 from randomizer import generate_page, talkatoo
 import secrets
@@ -27,14 +27,14 @@ def home():
 
         if card_mode:
             if len(request.form['seed']) > 0:
-                return redirect("/card/" + str(request.form['seed']) + "?settings=" + str(settings))
+                return redirect(url_for('card', seed=str(request.form['seed']), settings=[str(settings)]))
             else:
-                return redirect("/card?settings=" + str(settings))
+                return redirect(url_for('get_card', settings=[str(settings)]))
         else:
             if len(request.form['seed']) > 0:
-                return redirect("/seed/" + str(request.form['seed']) + "?settings=" + str(settings))
+                return redirect(url_for('randomizer', seed=str(request.form['seed']), settings=[str(settings)]))
             else:
-                return redirect("/seed?settings=" + str(settings))
+                return redirect(url_for('get_seed', settings=[str(settings)]))
     return render_template('index.html')
 
 
@@ -44,9 +44,9 @@ def get_seed():
     settings = request.args.get('settings')
     seed = secrets.token_hex(4)
     if settings is None:
-        return redirect("/seed/" + seed)
+        return redirect(url_for('randomizer', seed=seed))
     else:
-        return redirect("/seed/" + seed + "?settings=" + settings)
+        return redirect(url_for('randomizer', seed=seed, settings=[settings]))
 
 
 @app.route("/seed/<seed>")
@@ -62,7 +62,7 @@ def randomizer(seed : int):
     if settings is not None:
         settings_class = decode_settings(settings)
     else:
-        return redirect("/seed/" + seed + "?settings=" + str(Settings()))
+        return redirect(url_for('randomizer', seed=seed, settings=[str(Settings())]))
 
     return render_template('randomizer.html', seed=seed, moons=generate_page(seed_value, settings_class))
 
@@ -73,9 +73,9 @@ def get_card():
     settings = request.args.get('settings')
     seed = secrets.token_hex(4)
     if settings is None:
-        return redirect("/card/" + seed)
+        return redirect(url_for('card', seed=seed))
     else:
-        return redirect("/card/" + seed + "?settings=" + settings)
+        return redirect(url_for('card', seed=seed, settings=[settings]))
 
 @app.route("/card/<seed>")
 def card(seed : int):
@@ -90,6 +90,6 @@ def card(seed : int):
     if settings is not None:
         settings_class = decode_settings(settings)
     else:
-        return redirect("/card/" + seed + "?settings=" + str(Settings()))
+        return redirect(url_for('card', seed=seed, settings=[str(Settings())]))
 
     return render_template('card.html', seed=seed, moonData=talkatoo(seed_value, settings_class))
