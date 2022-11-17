@@ -43,7 +43,7 @@
     <br>
     <h2>Documentation</h2>
     <h3>Overrides</h3>
-    <p>Overrides give the ability for the user to add or remove moons from the logic. By default, the program will ignore all warp painting moons, revisit moons, postgame moons, hint art moons, and tourist moons. By inputting the moon id into the allow/block list, the moon will be added or removed in logic. Moon IDs can be found <a href="https://github.com/Minibeast/SMO-Randomizer-Web/wiki/Moon-IDs">here</a>.</p>
+    <p>Overrides give the ability for the user to add or remove moons from the logic. By default, the program will ignore all warp painting moons, revisit moons, postgame moons, hint art moons, and tourist moons. By inputting the moon id into the allow/block list, the moon will be added or removed in logic. Moon IDs can be found <a href="{{ env_vars['moons_link'] }}">here</a>.</p>
     <h3>Card Mode</h3>
     <p>Card mode attempts to implement talkatoo% routing into an external tool. The entire moon pool is randomized (with accordance to logic), and only 3 moons will be displayed at a time. Checking one moon off will get the next moon in the list. Buttons are also added allowing for the user to identify where they are in the story so logic can be accounted for.</p>
     <h3>Settings</h3>
@@ -51,7 +51,7 @@
     <p>Common Peace Skips - IP Clip and Snow Clip are accounted for in logic.</p>
     <p>First Moon Skip - First Moon Skip.</p>
     <br>
-    <p class="footer">Made by <a href="https://twitter.com/aMinibeast">Mini</a>. Source code available <a href="https://github.com/Minibeast/SMO-Randomizer-Web">here</a>.</p>
+    <p class="footer">Made by <a href="{{ env_vars['author_link'] }}">{{ env_vars['author'] }}</a>. <a href="{{ env_vars['repo'] }}">Source code</a></p>
     <script>
         function disable_settings() {
             chk_card = document.getElementById('cardmode');

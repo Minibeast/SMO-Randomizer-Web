@@ -2,6 +2,19 @@ from flask import Flask, render_template, redirect, request, url_for
 from settings import parse_form, decode_settings, Settings
 from randomizer import generate_page, talkatoo
 import secrets
+import os
+
+AUTHOR = os.environ.get("AUTHOR")
+REPO = os.environ.get("REPO")
+AUTHOR_LINK = os.environ.get("AUTHOR_LINK")
+MOONS_LINK = os.environ.get("MOONS_LINK")
+
+ENV_VARS = {
+    "author": AUTHOR if AUTHOR else "Developer",
+    "repo": REPO if REPO else "",
+    "author_link": AUTHOR_LINK if AUTHOR_LINK else "",
+    "moons_link": MOONS_LINK if MOONS_LINK else "",
+}
 
 app = Flask(__name__)
 
@@ -35,7 +48,7 @@ def home():
                 return redirect(url_for('randomizer', seed=str(request.form['seed']), settings=[str(settings)]))
             else:
                 return redirect(url_for('get_seed', settings=[str(settings)]))
-    return render_template('index.html')
+    return render_template('index.html', env_vars=ENV_VARS)
 
 
 @app.route("/seed")
